@@ -25,12 +25,11 @@ namespace TechJobsPersistent
 
 
         // This method gets called by the runtime. Use this method to add services to the container.
+
         public void ConfigureServices(IServiceCollection services)
         {
-            string v = Configuration.GetConnectionString("DefaultConnection");
             services.AddControllersWithViews();
-            services.AddDbContext<JobDbContext>(options => options.UseMySql(v, ServerVersion.AutoDetect(v)));
-       
+            services.AddDbContext<JobDbContext>(options => options.UseMySql(Configuration.GetConnectionString("DefaultConnection"), ServerVersion.AutoDetect(Configuration.GetConnectionString("DefaultConnection"))));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
